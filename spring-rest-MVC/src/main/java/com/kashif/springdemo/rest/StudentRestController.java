@@ -34,27 +34,38 @@ public class StudentRestController {
 	public List<Student> showStudents() {
 		return students;
 	}
-
+	
 	@GetMapping("/students/{studentId}")
 	public Student showStudentById(@PathVariable int studentId) {
-
-		if (studentId >= students.size() || studentId < 0) {
-			throw new StudentNotFoundException("Student not found for ID :" + studentId);
+		
+		if(studentId>=students.size() || studentId<0) {
+			throw new StudentNotFoundException("Student not found for ID :" +studentId);
 		}
-
+		
 		return students.get(studentId);
 	}
-
+	
 	@ExceptionHandler
-	public ResponseEntity<StudentErrorResponse> handleException(StudentNotFoundException exc) {
-
+	public ResponseEntity<StudentErrorResponse> handleException(StudentNotFoundException exc){
+		
 		StudentErrorResponse error = new StudentErrorResponse();
 		error.setStatusCode(HttpStatus.NOT_FOUND.value());
 		error.setMessage(exc.getMessage());
 		error.setTimeStamp(System.currentTimeMillis());
-
+		
 		return new ResponseEntity<StudentErrorResponse>(error, HttpStatus.NOT_FOUND);
-
+		
 	}
-
+	@ExceptionHandler
+	public ResponseEntity<StudentErrorResponse> handleException(Exception exc){
+		
+		StudentErrorResponse error = new StudentErrorResponse();
+		error.setStatusCode(HttpStatus.BAD_REQUEST.value());
+		error.setMessage(exc.getMessage());
+		error.setTimeStamp(System.currentTimeMillis());
+		
+		return new ResponseEntity<StudentErrorResponse>(error, HttpStatus.BAD_REQUEST);
+	
+	}
+	
 }
