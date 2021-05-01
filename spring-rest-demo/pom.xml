@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.kashif</groupId>
-	<artifactId>spring-rest-demo</artifactId>
+	<artifactId>spring-rest-helloWorld</artifactId>
 	<version>1.0</version>
 	<packaging>war</packaging>
 
