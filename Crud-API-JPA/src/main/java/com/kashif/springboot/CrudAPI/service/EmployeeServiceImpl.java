@@ -15,6 +15,7 @@ import com.kashif.springboot.CrudAPI.entity.Employee;
 public class EmployeeServiceImpl implements EmployeeService {
 
 	@Autowired
+	@Qualifier("employeeJPADAOImpl")
 	private EmployeeDAO employeeDao;
 
 	@Override
